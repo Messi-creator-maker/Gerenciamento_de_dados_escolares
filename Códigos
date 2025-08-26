@@ -1,0 +1,62 @@
+import time
+
+nota2 = 0
+nt = 0
+sala = []
+
+print('=== BANCO DE DADOS ESCOLAR ===')
+
+while True:
+    print('\nO que quer fazer?')
+    print('1 - Cadastrar aluno')
+    print('2 - Procurar informação de aluno')
+    print('3 - Sair')
+    opcao = input('\nDigite 1, 2 ou 3: ')
+
+    # Opção 1 - Cadastro
+    if opcao == '1':
+        aluno = {}  # cria um novo dicionário para cada aluno
+        nome = input('\nDigite o nome do aluno: ').strip()
+        idade = int(input('Digite a idade do aluno: '))
+        n = input('Você já tem a média do aluno (S/N)? ').strip().lower()
+
+        if n in ['não', 'n']:
+            nota2 = 0
+            nt = 0
+            quantas = int(input('\nQuantas notas você tem do aluno? '))
+            for n2 in range(quantas):
+                nota = float(input(f'Digite a {n2+1}ª nota: '))
+                nota2 += nota
+                nt += 1
+            media = nota2 / nt
+            print(f'\nA média do aluno foi: {media:.2f}')
+        else:
+            media = float(input('\nQual a média do aluno? '))
+
+        aluno["nome"] = nome.lower()  # salva sempre em minúsculo
+        aluno["idade"] = idade
+        aluno["média"] = media
+        sala.append(aluno)
+
+    # Opção 2 - Consulta
+    elif opcao == '2':
+        dgt = input('\nDigite o nome do aluno (se já cadastrado): ').strip().lower()
+
+        for aluno in sala:
+            if aluno["nome"] == dgt:
+                print(f'\nNome: {aluno["nome"].title()}')
+                print(f'Idade: {aluno["idade"]}')
+                print(f'Média: {aluno["média"]:.2f}')
+                break
+        else:
+            print('\nAluno não encontrado, por favor, cadastre o aluno!')
+
+    # Opção 3 - Sair
+    elif opcao == '3':
+        print("Saindo...")
+        time.sleep(0.5)
+        print ('Trabalhando nisso...')
+        time.sleep(0.9)
+        print ('Acesso permitido! ')
+        time.sleep(1)
+        exit()
